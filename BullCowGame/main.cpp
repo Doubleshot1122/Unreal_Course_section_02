@@ -34,9 +34,9 @@ int main() {
 // introduce the game
 void PrintIntro() 
 {	
-	constexpr int32 WORD_LENGTH = 5;
-	std::cout << "Welcome to Bulls and Cows, a fun word game." << std::endl;
-	std::cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thinking of\n";
+	std::cout << "Welcome to Bulls and Cows, a fun word game.\n";
+	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength();
+	std::cout << " letter isogram I'm thinking of\n";
 	std::cout << std::endl;
 	return;
 }
@@ -51,9 +51,13 @@ void PlayGame()
 	for (int32 count = 0; count < MaxTries; count++)
 	{
 		FText Guess = GetGuess();  // TODO make loop check for valid answers
-		// submit valid guess to game
+		// submit valid guess to game and recive counts
+		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
+
 		// print number of bulls and cows
-		std::cout << "Your guess was: " << Guess << std::endl;
+		std::cout << "Bulls = " << BullCowCount.Bulls;
+		std::cout << ". Cows = " << BullCowCount.Cows << std::endl;
+
 		std::cout << std::endl;
 	}
 
